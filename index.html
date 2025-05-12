@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Affiliate Shopee</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0; background: #fff;
+  }
+  header {
+    background: #d84315;
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+  }
+  header img.profile {
+    width: 40px; height: 40px; border-radius: 50%; margin-right: 12px;
+  }
+  header .info {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  header .subtitle {
+    font-weight: normal;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .search-bar {
+    padding: 10px 16px;
+    background: #fff3e0;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  .categories {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    gap: 8px;
+  }
+  .categories button {
+    border: 1px solid #d84315;
+    background: white;
+    color: #d84315;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .categories button:hover {
+    background: #d84315;
+    color: white;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-card img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+  }
+  .product-info {
+    padding: 6px 8px;
+    font-size: 12px;
+    color: #333;
+    flex-grow: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="profile" src="https://i.ibb.co.com/08KmxQP/file-00000000204061f8bbae154c03e5dc47.png" alt="Profile" />
+  <div>
+    <div class="info">Koleksi Barang Ajaib</div>
+    <div class="subtitle">Silahkan cari kategori yang sesuai dan klik produk yang diinginkan</div>
+  </div>
+</header>
+
+<div class="search-bar">
+  <input type="text" placeholder="Cari Nomor Produk" id="searchInput" oninput="filterProducts()" />
+</div>
+
+<div class="categories">
+  <button onclick="vibrateOnClick(); filterCategory('gift')">🔨 Barang Ajaib</button>
+  <button onclick="vibrateOnClick(); filterCategory('outfit')">🌟 Outfit</button>
+  <button onclick="vibrateOnClick(); filterCategory('all')">Lebih Banyak ▼</button>
+</div>
+
+<div class="product-grid" id="productGrid">
+
+  <div class="product-card" data-category="gift" onclick="location.href='https://s.shopee.co.id/8zsaGyjtFj'">
+    <img src="https://down-id.img.susercontent.com/file/id-11134207-7rash-m3vskpg1kgyi2b.webp" alt="Gergaji Lipat Efisien" />
+    <div class="product-info">1A. Gergaji Lipat Efisien</div>
+  </div>
+
+  <div class="product-card" data-category="outfit" onclick="location.href='https://s.shopee.co.id/60EyhddOS4'">
+    <img src="https://down-id.img.susercontent.com/file/sg-11134201-7renj-m1zac749abjr2e@resize_w900_nl.webp" alt="Boxer smith" />
+    <div class="product-info">2B. Boxer smith</div>
+  </div>
+
+</div>
+
+<script>
+  function vibrateOnClick() {
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+  }
+
+  function filterCategory(category) {
+    const products = document.querySelectorAll('.product-card');
+    products.forEach(p => {
+      if(category === 'all' || p.dataset.category === category) {
+        p.style.display = 'flex';
+      } else {
+        p.style.display = 'none';
+      }
+    });
+  }
+
+  function filterProducts() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const products = document.querySelectorAll('.product-card');
+    products.forEach(p => {
+      const text = p.querySelector('.product-info').textContent.toLowerCase();
+      if(text.includes(search)) {
+        p.style.display = 'flex';
+      } else {
+        p.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
